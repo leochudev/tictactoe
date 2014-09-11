@@ -1,6 +1,6 @@
 tictactoe
 =========
 
-**mini python game**
+###**mini python game**
 - (minimax algorithm)
 
