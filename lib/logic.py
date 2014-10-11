@@ -1,10 +1,13 @@
 #!/usr/bin/python
 from random import randrange
-from player import gameplayer
 
 # Constant variables
 DIVIDOR 		= '========================================================'
 HINTS_DIVIDOR 	= '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+
+BLANK			= 10
+PLAYER_O 		= 11
+PLAYER_X 		= 21
 
 class gameinfo:
 	def printHeaderInfo(self, playerA, playerB):
@@ -15,9 +18,9 @@ class gameinfo:
 		print 'Game Start:'
 
 	def printGamePlayer(self, item):
-		if item == gameplayer.PLAYER_O:
+		if item == PLAYER_O:
 			return 'O'
-		elif item == gameplayer.PLAYER_X:
+		elif item == PLAYER_X:
 			return 'X'
 		else:
 			return ' '
@@ -28,7 +31,7 @@ class gameinfo:
 			print 'Draw Game!'
 			print DIVIDOR
 		else:
-			winner = 'O' if winner == gameplayer.PLAYER_O else 'X'
+			winner = 'O' if winner == PLAYER_O else 'X'
 			print DIVIDOR
 			print 'Congratulations!'
 			print 'The Winner is %s' % winner
@@ -40,45 +43,45 @@ class gamelogic:
 	DRAW_GAME 		= 20
 	QUIT_GAME 		= 30
 
-	PLAYER_O_WIN	= gameplayer.PLAYER_O*3
-	PLAYER_X_WIN	= gameplayer.PLAYER_X*3
+	PLAYER_O_WIN	= PLAYER_O*3
+	PLAYER_X_WIN	= PLAYER_X*3
 	
 	def checkDrawGame(self, board):
 		return True if sum(board)%10 == 9 else False
 		
 	def checkWinGame(self, board):
 		if ((board[0]+board[1]+board[2]) == self.PLAYER_O_WIN):
-			return gameplayer.PLAYER_O
+			return PLAYER_O
 		elif ((board[0]+board[1]+board[2]) == self.PLAYER_X_WIN):
-			return gameplayer.PLAYER_X
+			return PLAYER_X
 		elif ((board[3]+board[4]+board[5]) == self.PLAYER_O_WIN):
-			return gameplayer.PLAYER_O
+			return PLAYER_O
 		elif ((board[3]+board[4]+board[5]) == self.PLAYER_X_WIN):
-			return gameplayer.PLAYER_X
+			return PLAYER_X
 		elif ((board[6]+board[7]+board[8]) == self.PLAYER_O_WIN):
-			return gameplayer.PLAYER_O
+			return PLAYER_O
 		elif ((board[6]+board[7]+board[8]) == self.PLAYER_X_WIN):
-			return gameplayer.PLAYER_X
+			return PLAYER_X
 		elif ((board[0]+board[3]+board[6]) == self.PLAYER_O_WIN):
-			return gameplayer.PLAYER_O
+			return PLAYER_O
 		elif ((board[0]+board[3]+board[6]) == self.PLAYER_X_WIN):
-			return gameplayer.PLAYER_X
+			return PLAYER_X
 		elif ((board[1]+board[4]+board[7]) == self.PLAYER_O_WIN):
-			return gameplayer.PLAYER_O
+			return PLAYER_O
 		elif ((board[1]+board[4]+board[7]) == self.PLAYER_X_WIN):
-			return gameplayer.PLAYER_X
+			return PLAYER_X
 		elif ((board[2]+board[5]+board[8]) == self.PLAYER_O_WIN):
-			return gameplayer.PLAYER_O
+			return PLAYER_O
 		elif ((board[2]+board[5]+board[8]) == self.PLAYER_X_WIN):
-			return gameplayer.PLAYER_X
+			return PLAYER_X
 		elif ((board[0]+board[4]+board[8]) == self.PLAYER_O_WIN):
-			return gameplayer.PLAYER_O
+			return PLAYER_O
 		elif ((board[0]+board[4]+board[8]) == self.PLAYER_X_WIN):
-			return gameplayer.PLAYER_X
+			return PLAYER_X
 		elif ((board[2]+board[4]+board[6]) == self.PLAYER_O_WIN):
-			return gameplayer.PLAYER_O
+			return PLAYER_O
 		elif ((board[2]+board[4]+board[6]) == self.PLAYER_X_WIN):
-			return gameplayer.PLAYER_X
+			return PLAYER_X
 		elif self.checkDrawGame(board):
 			return self.DRAW_GAME
 		else:
@@ -86,10 +89,10 @@ class gamelogic:
 
 class gameboard(gameinfo):
 	def __init__(self):
-		self.list = [int(gameplayer.BLANK) for i in xrange(9)]
+		self.list = [int(BLANK) for i in xrange(9)]
 	
 	def checkAvailable(self, step):
-		return True if self.list[step] == gameplayer.BLANK else False
+		return True if self.list[step] == BLANK else False
 
 	def getGameBoard(self):
 		return self.list

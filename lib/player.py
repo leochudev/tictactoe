@@ -1,6 +1,7 @@
+
 #!/usr/bin/python
-from mylib import gamelogic
-from mylib import gameboard
+from logic import gamelogic
+from logic import gameboard
 
 # The player class
 class gameplayer:
