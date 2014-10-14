@@ -1,22 +1,16 @@
-
-#!/usr/bin/python
+	#!/usr/bin/python
 from logic import gamelogic
 from logic import gameboard
 
 # The player class
-class gameplayer:
-	# value in the game board
-	BLANK			= 10
-	PLAYER_O 		= 11
-	PLAYER_X 		= 21
-
+class gameplayer(gamelogic):
 	# user input
 	SHOW_HINT		= 40
 	EXCEPTION		= -1
 
 	def __init__(self, player):
 		self.player 	= player
-		self.oppnent 	= self.PLAYER_O if self.player != self.PLAYER_O else self.PLAYER_X
+		self.oppnent 	= gamelogic.PLAYER_O if self.player != gamelogic.PLAYER_O else gamelogic.PLAYER_X
 		self.choice		= 0
 		
 	def getPlayer(self):

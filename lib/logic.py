@@ -1,43 +1,11 @@
 #!/usr/bin/python
 from random import randrange
 
-# Constant variables
-DIVIDOR 		= '========================================================'
-HINTS_DIVIDOR 	= '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-
-BLANK			= 10
-PLAYER_O 		= 11
-PLAYER_X 		= 21
-
-class gameinfo:
-	def printHeaderInfo(self, playerA, playerB):
-		print DIVIDOR
-		print 'Tic Tac Toe'
-		print 'human: %s, computer: %s\n' % (self.printGamePlayer(playerA.getPlayer()), self.printGamePlayer(playerB.getPlayer()))
-		print DIVIDOR
-		print 'Game Start:'
-
-	def printGamePlayer(self, item):
-		if item == PLAYER_O:
-			return 'O'
-		elif item == PLAYER_X:
-			return 'X'
-		else:
-			return ' '
-
-	def printWinnerInfo(self, winner):
-		if winner == gamelogic.DRAW_GAME:
-			print DIVIDOR
-			print 'Draw Game!'
-			print DIVIDOR
-		else:
-			winner = 'O' if winner == PLAYER_O else 'X'
-			print DIVIDOR
-			print 'Congratulations!'
-			print 'The Winner is %s' % winner
-			print DIVIDOR
-
 class gamelogic:
+	BLANK			= 10
+	PLAYER_O 		= 11
+	PLAYER_X 		= 21
+
 	# Game State
 	CONT_GAME 		= 10
 	DRAW_GAME 		= 20
@@ -51,48 +19,79 @@ class gamelogic:
 		
 	def checkWinGame(self, board):
 		if ((board[0]+board[1]+board[2]) == self.PLAYER_O_WIN):
-			return PLAYER_O
+			return self.PLAYER_O
 		elif ((board[0]+board[1]+board[2]) == self.PLAYER_X_WIN):
-			return PLAYER_X
+			return self.PLAYER_X
 		elif ((board[3]+board[4]+board[5]) == self.PLAYER_O_WIN):
-			return PLAYER_O
+			return self.PLAYER_O
 		elif ((board[3]+board[4]+board[5]) == self.PLAYER_X_WIN):
-			return PLAYER_X
+			return self.PLAYER_X
 		elif ((board[6]+board[7]+board[8]) == self.PLAYER_O_WIN):
-			return PLAYER_O
+			return self.PLAYER_O
 		elif ((board[6]+board[7]+board[8]) == self.PLAYER_X_WIN):
-			return PLAYER_X
+			return self.PLAYER_X
 		elif ((board[0]+board[3]+board[6]) == self.PLAYER_O_WIN):
-			return PLAYER_O
+			return self.PLAYER_O
 		elif ((board[0]+board[3]+board[6]) == self.PLAYER_X_WIN):
-			return PLAYER_X
+			return self.PLAYER_X
 		elif ((board[1]+board[4]+board[7]) == self.PLAYER_O_WIN):
-			return PLAYER_O
+			return self.PLAYER_O
 		elif ((board[1]+board[4]+board[7]) == self.PLAYER_X_WIN):
-			return PLAYER_X
+			return self.PLAYER_X
 		elif ((board[2]+board[5]+board[8]) == self.PLAYER_O_WIN):
-			return PLAYER_O
+			return self.PLAYER_O
 		elif ((board[2]+board[5]+board[8]) == self.PLAYER_X_WIN):
-			return PLAYER_X
+			return self.PLAYER_X
 		elif ((board[0]+board[4]+board[8]) == self.PLAYER_O_WIN):
-			return PLAYER_O
+			return self.PLAYER_O
 		elif ((board[0]+board[4]+board[8]) == self.PLAYER_X_WIN):
-			return PLAYER_X
+			return self.PLAYER_X
 		elif ((board[2]+board[4]+board[6]) == self.PLAYER_O_WIN):
-			return PLAYER_O
+			return self.PLAYER_O
 		elif ((board[2]+board[4]+board[6]) == self.PLAYER_X_WIN):
-			return PLAYER_X
+			return self.PLAYER_X
 		elif self.checkDrawGame(board):
 			return self.DRAW_GAME
 		else:
 			return self.CONT_GAME
 
+class gameinfo(gamelogic):
+	DIVIDOR 		= '========================================================'
+	HINTS_DIVIDOR 	= '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+
+	def printHeaderInfo(self, playerA, playerB):
+		print self.DIVIDOR
+		print 'Tic Tac Toe'
+		print 'human: %s, computer: %s\n' % (self.printGamePlayer(playerA.getPlayer()), self.printGamePlayer(playerB.getPlayer()))
+		print self.DIVIDOR
+		print 'Game Start:'
+
+	def printGamePlayer(self, item):
+		if item == gamelogic.PLAYER_O:
+			return 'O'
+		elif item == gamelogic.PLAYER_X:
+			return 'X'
+		else:
+			return ' '
+
+	def printWinnerInfo(self, winner):
+		if winner == gamelogic.DRAW_GAME:
+			print self.DIVIDOR
+			print 'Draw Game!'
+			print self.DIVIDOR
+		else:
+			winner = 'O' if winner == gamelogic.PLAYER_O else 'X'
+			print self.DIVIDOR
+			print 'Congratulations!'
+			print 'The Winner is %s' % winner
+			print self.DIVIDOR
+
 class gameboard(gameinfo):
 	def __init__(self):
-		self.list = [int(BLANK) for i in xrange(9)]
+		self.list = [int(gamelogic.BLANK) for i in xrange(9)]
 	
 	def checkAvailable(self, step):
-		return True if self.list[step] == BLANK else False
+		return True if self.list[step] == gamelogic.BLANK else False
 
 	def getGameBoard(self):
 		return self.list
@@ -111,7 +110,7 @@ class gameboard(gameinfo):
 		print '\t %s | %s | %s ' % (self.printGamePlayer(self.list[6]), self.printGamePlayer(self.list[7]), self.printGamePlayer(self.list[8]))
 
 	def printGameBoardHints(self):
-		print HINTS_DIVIDOR
+		print gameinfo.HINTS_DIVIDOR
 		print 'Input the corresponding key to choose your step:'
 		print 
 		print '\t q | w | e '
@@ -120,4 +119,4 @@ class gameboard(gameinfo):
 		print '\t-----------'
 		print '\t z | x | c '
 		print
-		print HINTS_DIVIDOR
+		print gameinfo.HINTS_DIVIDOR

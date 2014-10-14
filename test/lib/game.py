@@ -1,9 +1,10 @@
 #!/usr/bin/python
-from logic import gamelogic
-from logic import gameboard
+from player import gamelogic
+from player import gameboard
 
 from player import human
 from player import computer
+
 
 # value in the game board
 BLANK			= 10
