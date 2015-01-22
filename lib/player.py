@@ -1,4 +1,4 @@
-	#!/usr/bin/python
+#!/usr/bin/python
 from logic import gamelogic
 from logic import gameboard
 
